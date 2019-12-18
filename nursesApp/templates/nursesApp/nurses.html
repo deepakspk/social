@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}<p></p>
+
+<div class="jumbotron">
+
+  <h1 class="display-4">Welcome to Nurses App Page!!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+
+  <a class="btn btn-primary btn-lg" href="{% url 'nursesApp:members' %}" role="button">Members</a>
+  <a class="btn btn-warning btn-lg" href="{% url 'nursesApp:contributors' %}" role="button">Contributors</a>
+  <a class="btn btn-success btn-lg" href="{% url 'nursesApp:winners' %}" role="button">Winners</a>
+
+</div>
+<p></p>
+
+<div class="jumbotron">
+  <div class="container">
+    <h2 class="text-center"> New Members </h2>
+    <div class="row">
+      {% for member in members %}
+      <div class="col-sm-3">
+        <div class="card">
+          <img src="{{member.img.url}}" alt="" style="width:100%">
+          <p><a href="{% url 'nursesApp:memberDetail' pk=member.pk %}">{{member.name}}</a></p>
+          <p class="title">Added by: {{member.added_by}} </p>
+          <p>Joined on: {{member.joined_on}}</p>
+          <p><a class="btn btn-dark btn-block" href="{% url 'nursesApp:memberDetail' pk=member.pk %}" role="button">View Details</a></p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

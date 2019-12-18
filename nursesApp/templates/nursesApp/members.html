@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<p></p>
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to Member Page!!</h1>
+  <a class="btn btn-outline-info btn-lg" href="{% url 'nursesApp:create_member' %}" role="button">Create Member</a>
+  <a class="btn btn-outline-secondary btn-lg" href="{% url 'nursesApp:upload' %}" role="button">Upload a bulk Members</a>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <a class="btn btn-primary btn-lg" href="{% url 'nursesApp:members' %}" role="button">Members</a>
+  <a class="btn btn-warning btn-lg" href="{% url 'nursesApp:contributors' %}" role="button">Contributors</a>
+  <a class="btn btn-success btn-lg" href="{% url 'nursesApp:winners' %}" role="button">Winners</a>
+</div>
+
+<input class="form-control form-control-lg" id="membersearch" type="text" placeholder="Search member here..">
+<p></p>
+<div id="searchResult"></div>
+
+<div class="jumbotron">
+  <table class="table table-hover" id="myTable">
+    <thead>
+      <tr>
+        <th scope="col">SN</th>
+        <th scope="col">Name</th>
+        <th scope="col">Joined on</th>
+        <th scope="col">Added By</th>
+        <th scope="col">Nurse?</th>
+        <th scope="col">Location</th>
+        <th scope="col">Url</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for member in members %}
+      <tr>
+        <td scope="row">{{ forloop.counter }}</td>
+        <td> <a href="{% url 'nursesApp:memberDetail' pk=member.pk %}">{{member.name}}</a></td>
+        <td> {{member.joined_on }}</td>
+        <td> {{member.added_by }}</td>
+        <td> {{member.nurse}}</td>
+        <td> {{member.position}}</td>
+        <td> <a href="{{member.url}}"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtF4BGEWqpxW1cKuNUMF6s2jGrBgRzSaWjekdqqCO-1oFHr2fq" width="50"></a></td>
+        <td> <a href="{{member.url}}"> <img src="{{member.img.url}}" width="30" alt=""> </a> </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+        Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">next</a>
+      {% endif %}
+    </span>
+  </div>
+</div>
+{% endblock%}

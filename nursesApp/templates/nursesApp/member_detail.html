@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block content %}
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7">
+          <h3 class="display-7">Here's the Details of the member!</h3>
+          <p> Name: {{ member_detail.name}}</p>
+          <p> Joined on: {{ member_detail.joined_on}}</p>
+          <p> Added by: {{ member_detail.added_by}}</p>
+          <p> Nurse: {{ member_detail.nurse}}</p>
+          <p> Location: {{ member_detail.position}}</p>
+          <p>Total: {{contrib.t}}</p>
+          <p>Nurses: {{contrib.y}}</p>
+          <p>Non Nurse {{contrib.n}}</p>
+          <a class="btn btn-outline-secondary btn-lg" href="{% url 'nursesApp:memberUpdate' pk=member_detail.pk %}" role="button">Edit Member</a>
+          <a class="btn btn-outline-danger btn-lg" href="{% url 'nursesApp:memberDelete' pk=member_detail.pk %}" role="button">Delete Member</a>
+          <h3>Member Added:</h3>
+          {% for i in membe%}
+            <li>{{ i }}</li>
+            {% endfor %}
+
+          </div>
+            <div class="col-sm-5">
+              {% if contrib.t == 3 %}
+                <img src="{% static "images/gold.jpg" %}" alt="gold"/>
+              {% elif contrib.t == 2 %}
+                <img src="{% static "images/silver.jpg" %}" alt="silver"/>
+              {% elif contrib.t == "Bronze winner" %}
+                  <img src="{% static "images/bronze.jpg" %}" alt="bronze"/>
+              {% else %}
+                <img src="{% static "images/bronze.jpg" %}" alt="bronze"/>
+              {% endif %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+  {% endblock%}

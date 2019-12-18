@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block content %}
+  <p></p>
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to Contributors Page!!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'nursesApp:members' %}" role="button">Members</a>
+    <a class="btn btn-warning btn-lg" href="{% url 'nursesApp:contributors' %}" role="button">Contributors</a>
+    <a class="btn btn-success btn-lg" href="{% url 'nursesApp:winners' %}" role="button">Winners</a>
+  </div>
+
+  <div class="jumbotron">
+  <table class="table table-hover" id="myTable">
+    <thead>
+      <tr>
+        <th scope="col">SN</th>
+        <th scope="col">Contributor</th>
+        <th scope="col">Memb. Added</th>
+        <th scope="col">Nurse</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for contributor in contributors %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td> {{contributor.name}}</td>
+        <td>{{contributor.t}}</td>
+        <td>{{contributor.y}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+          {% endif %}
+      </span>
+  </div>
+  </div>
+  {% endblock %}

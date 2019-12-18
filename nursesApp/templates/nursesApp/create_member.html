@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<p></p>
+<div class="jumbotron">
+  <div class="col-md-8 offset-2">
+    <h1 class="display-4">Create a new Member!!</h1>
+    {% if message %}
+    <div class="alert alert-success" role="alert">
+      Thank you for your feedback!!
+    </div>
+    {% endif %}
+    <form action="{% url 'nursesApp:create_member' %}" method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+{% endblock %}

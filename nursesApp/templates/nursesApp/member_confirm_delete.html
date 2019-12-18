@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="jumbotron">
+  <h3>Are you sure want to delete the data!!
+    {{ member.name}}
+  </h3>
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" class='btn btn-danger btn-lg' value="Delete">
+    <a class="btn btn-primary btn-lg" href="{% url 'nursesApp:memberDetail' pk=member.pk %}" role="button">Cancle</a>
+  </form>
+</div>
+{% endblock %}

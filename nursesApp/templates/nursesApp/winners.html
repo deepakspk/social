@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+  {% load staticfiles %}
+  {% block content %}<p></p>
+
+  <div class="jumbotron">
+    <h1 class="display-4">Welcome to Winners Page!!</h1>
+    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'nursesApp:members' %}" role="button">Members</a>
+    <a class="btn btn-warning btn-lg" href="{% url 'nursesApp:contributors' %}" role="button">Contributors</a>
+    <a class="btn btn-success btn-lg" href="{% url 'nursesApp:winners' %}" role="button">Winners</a>
+  </div>
+
+  <div class="jumbotron">
+    <table class="table table-hover" id="myTable">
+      <thead>
+        <tr>
+          <th scope="col">SN </th>
+          <th scope="col">Name </th>
+          <th scope="col">Memb. Added </th>
+          <th scope="col">Nurse </th>
+          <th scope="col">Winner </th>
+          <th scope="col">Win Date Announched </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for contributor in winners %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td> {{contributor.name}}</td>
+          <td> {{contributor.t }}</td>
+          <td> {{contributor.y}}</td>
+          <td>
+            {% if contributor.t >= 3 %}
+              <img src="{% static "images/gold.jpg" %}" width="20" alt="gold"/> Gold
+            {% elif contributor.t == 2 %}
+              <img src="{% static "images/silver.jpg" %}" width="20" alt="silver"/> Silver
+            {% elif contributor.t == 1 %}
+                <img src="{% static "images/bronze.jpg" %}" width="20" alt="bronze"/> Bronze
+            {% else %}
+              Not Winner
+            {% endif %}
+          </td>
+          <td> {{contributor.win_date}} </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
