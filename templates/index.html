@@ -1,36 +1,34 @@
-{% extends "base.html" %}
-  {% load staticfiles %}
-    {% block content %}
+{% extends "posts/post_base.html" %}
+{% load staticfiles %}
+{% block content %}<p></p>
+<div class="jumbotron">
+  <div class="content">
+		{% if user.is_authenticated %}
+		<h1 class="display-4">Hello, <a href="{% url 'posts:for_user' username=user.username %}">{{user.username }}</a>
+    </h1>
+    {% endif %}
 
-  <div class="jumbotron">
+	</div>
 
-    <h1 class="display-4">Welcome to Nurses App Page!!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    {% if user.is_authenticated %}
+      <p class="lead">Welcome to the Groups Page! Select a Group with a shared interest!</p>
+      <a class="btn btn-success my-20 my-sm-0 ml-2" href="{% url 'posts:create' %}" class="btn btn-simple">Create Post</a>
+      <a class="btn btn-warning my-20 my-sm-0 ml-2" href="{% url 'groups:all' %}" class="btn btn-simple">View All Groups</a>
+      <a class="btn btn-primary my-20 my-sm-0 ml-2" href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a>
+    {% else %}
 
-    <a class="btn btn-primary btn-lg" href="{% url 'nursesApp:members' %}" role="button">Members</a>
-    <a class="btn btn-warning btn-lg" href="{% url 'nursesApp:contributors' %}" role="button">Contributors</a>
-    <a class="btn btn-success btn-lg" href="{% url 'nursesApp:winners' %}" role="button">Winners</a>
+    <h1 class="display-4">Please Login !!</h1>
+    <a class="btn btn-primary btn-lg" href="{% url 'accounts:login' %}" role="button">Login</a>
 
-  </div>
-  <p></p>
-
-  <div class="jumbotron">
-  <div class="container">
-    <h2 class="text-center"> New Members </h2>
-  <div class="row">
-    {% for member in members %}
-    <div class="col-sm-3">
-      <div class="card">
-        <img src="{{member.img.url}}" alt="" style="width:100%">
-        <p><a href="{% url 'nursesApp:memberDetail' pk=member.pk %}">{{member.name}}</a></p>
-        <p class="title">Added by: {{member.added_by}} </p>
-        <p>Joined on: {{member.joined_on}}</p>
-        <p><a class="btn btn-dark btn-block" href="{% url 'nursesApp:memberDetail' pk=member.pk %}" role="button">View Details</a></p>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  </div>
+    {% endif %}
   </div>
 
-  {% endblock %}
+{% load humanize %}
+{% block post_content %}
+<div class="col-md-8">
+  {% for post in post_list %}
+  {% include "posts/_post.html" %}
+  {% endfor %}
+</div>
+{% endblock %}
+{% endblock %}

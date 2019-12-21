@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class PostListView(SelectRelatedMixin, generic.ListView):
-    template_name = 'nursesApp/index.html'
+    template_name = 'index.html'
     model = models.Post
     select_related = ("user", "group")
     context_object_name = 'post_list'
@@ -24,6 +24,7 @@ class PostListView(SelectRelatedMixin, generic.ListView):
         return models.Post.objects.all()
 
 class PostList(SelectRelatedMixin, generic.ListView):
+    template_name = 'index.html'
     model = models.Post
     select_related = ("user", "group")
     context_object_name = 'post_list'

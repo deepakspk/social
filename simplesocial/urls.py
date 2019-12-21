@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from nursesApp import views
+# from nursesApp import views
+from posts import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name="index"),
+    path('', views.PostList.as_view(), name="index"),
+    path('allposts', views.PostList.as_view(), name="all"),
     path('admin/', admin.site.urls),
-    path('test/', views.TestPage.as_view(), name="test"),
-    path('thanks/', views.ThanksPage.as_view(), name="thanks"),
+    # path('test/', views.TestPage.as_view(), name="test"),
+    # path('thanks/', views.ThanksPage.as_view(), name="thanks"),
     path('nurses/', include("nursesApp.urls", namespace="nurses")),
     path('accounts/', include("accounts.urls", namespace="accounts")),
     path('accounts/', include("django.contrib.auth.urls")),
