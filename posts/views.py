@@ -14,6 +14,12 @@ from . import models
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+class TestPage(TemplateView):
+    template_name = 'test.html'
+
+class ThanksPage(TemplateView):
+    template_name = 'thanks.html'
+
 class PostListView(SelectRelatedMixin, generic.ListView):
     template_name = 'index.html'
     model = models.Post

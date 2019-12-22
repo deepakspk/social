@@ -10,9 +10,13 @@ class PostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class':'form-control'})
+
         if user is not None:
             self.fields["group"].queryset = (
                 models.Group.objects.filter(
                     pk__in=user.groups.values_list("group__pk")
                 )
             )
+        
