@@ -1,21 +1,22 @@
 <div class="card mb-2">
   <div class="card-header">
-		<strong><a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></strong>
-	</div>
-		  <div class="card-body">
-				  <blockquote class="blockquote mb-0">
-						<h5>{{ post.message_html|safe }}</h5>
-					<div class="card-footer text-muted">
-					<time class="time"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
-					{% if post.group %}
-			  <footer class="blockquote-footer"><span class="group-name">in <strong><a href="#">{{ post.group.name }}</a></strong></span></footer>
-				</blockquote>
-				{% if user.is_authenticated and post.user == user and not hide_delete %}
-					<a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">
-						<span class="fa fa-remove text-danger" aria-hidden="true"></span>
-						<span class="text-danger icon-label">Delete</span>
-					</a>
-				{% endif %}
-			</div>
-		</div>
-			{% endif %}
+    <strong><a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></strong>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <h5>{{ post.message_html|safe }}</h5>
+      <div class="card-footer text-muted">
+        <time class="time"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
+        {% if post.group %}
+        <footer class="blockquote-footer"><span class="group-name">in <strong><a href="{% url 'groups:all' %}">{{ post.group.name }} Group</a></strong></span></footer>
+      </div>
+    </blockquote>
+    {% if user.is_authenticated and post.user == user and not hide_delete %}
+    <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">
+      <span class="fa fa-remove text-danger" aria-hidden="true"></span>
+      <span class="text-danger icon-label">Delete</span>
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

@@ -8,6 +8,11 @@ class PostForm(forms.ModelForm):
         model = models.Post
 
     def __init__(self, *args, **kwargs):
+         super().__init__(*args, **kwargs)
+         for field in self.fields:
+             self.fields[field].widget.attrs.update({'class':'form-control'})
+
+    def __init__(self, *args, **kwargs):
         user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
         for field in self.fields:
@@ -19,4 +24,3 @@ class PostForm(forms.ModelForm):
                     pk__in=user.groups.values_list("group__pk")
                 )
             )
-        

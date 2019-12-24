@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.core import serializers
 from django.http import HttpResponse
 from . import models
-# from .models import Member
 
 class TestPage(TemplateView):
     template_name = 'test.html'

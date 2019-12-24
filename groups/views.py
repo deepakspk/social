@@ -9,9 +9,10 @@ from django.shortcuts import get_object_or_404
 from django.views import generic
 from groups.models import Group,GroupMember
 from . import models
+from . import forms
 
 class CreateGroup(LoginRequiredMixin, generic.CreateView):
-    fields = ("name", "description")
+    form_class = forms.GroupForm
     model = Group
 
 class SingleGroup(generic.DetailView):
