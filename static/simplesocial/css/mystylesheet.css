@@ -21,6 +21,11 @@
       &:hover{color:#4180CB}
     }
   }
+
+  .lead {
+    color: #4180CB;
+  }
+
   .location{
     i{font-size: 18px;}
   }

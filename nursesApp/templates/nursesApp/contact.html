@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}<p></p>
+<div class="jumbotron">
+  <h1 class="display-4">Write us a Message!!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+<hr>
+<form action="" method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" class="btn btn-primary btn-lg btn-block mt-3" name="submit" value="Submit">
+</form>
+<p></p>
+</div>
+
+<div class="jumbotron">
+<h1 class="display-4">Find us on Google map!!</h1>
+<div class="map-responsive">
+ <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France" width="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+</div>
+
+{% endblock %}

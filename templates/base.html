@@ -11,13 +11,17 @@
   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/0145706903.js" crossorigin="anonymous"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
   <link rel="stylesheet" href="{% static 'simplesocial/css/mystylesheet.css'%}">
 </head>
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'index' %}">Social</a>
+      <a class="navbar-brand" href="{% url 'index' %}"><i class="fas fa-users"></i> Social</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -25,10 +29,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'nursesApp:nurses' %}">Nurses App</a>
+            <a class="nav-link" href="{% url 'nursesApp:nurses' %}"><i class="fas fa-user-nurse"></i> Nurses App</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'nursesApp:contactus' %}">Contact Us</a>
+            <a class="nav-link" href="{% url 'blog:post_list' %}"><i class="fab fa-blogger-b"></i> Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'nursesApp:contact' %}"><i class="fas fa-address-book"></i> Contact Us</a>
             </a>
           </li>
         </ul>
@@ -38,12 +45,12 @@
         </span>
 
         <form class="form-inline my-2 my-lg-0">
-          <a href="{% url 'accounts:logout' %}" class="btn btn-outline-danger mr-2 ">Log Out</a>
+          <a href="{% url 'accounts:logout' %}" class="btn btn-outline-danger mr-2 "><i class="fas fa-sign-out-alt"></i> Log Out</a>
         </form>
         {% else %}
         <form class="form-inline my-2 my-lg-0">
-          <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary mr-2 ">Log In</a>
-          <a href="{% url 'accounts:signup' %}" class="btn btn-outline-success ">Sign Up</a>
+          <a href="{% url 'accounts:login' %}" class="btn btn-outline-primary mr-2 "><i class="fas fa-user"></i> Log In</a>
+          <a href="{% url 'accounts:signup' %}" class="btn btn-outline-success "> Sign Up <i class="fas fa-user-plus"></i> </a>
         </form>
         {% endif %}
       </div>
@@ -61,7 +68,12 @@
     <div class="col-lg-5 col-xs-12 about-company">
       <h2>Heading</h2>
       <p class="pr-5 text-white-50">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac ante mollis quam tristique convallis </p>
-      <p><a href="#"><i class="fa fa-facebook-square mr-1"></i></a><a href="#"><i class="fa fa-linkedin-square"></i></a></p>
+      <h3>
+        <a href="#"><i class="fab fa-facebook-square"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </h3>
     </div>
     <div class="col-lg-3 col-xs-12 links">
       <h4 class="mt-lg-0 mt-sm-3">Links</h4>

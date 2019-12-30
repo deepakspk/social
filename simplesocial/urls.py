@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-# from nursesApp import views
 from posts import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,11 +25,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.TestPage.as_view(), name="test"),
     path('thanks/', views.ThanksPage.as_view(), name="thanks"),
+    path('thank_you/', views.ThanksMsg.as_view(), name="thanksformsg"),
     path('nurses/', include("nursesApp.urls", namespace="nurses")),
     path('accounts/', include("accounts.urls", namespace="accounts")),
     path('accounts/', include("django.contrib.auth.urls")),
     path('posts/', include("posts.urls", namespace="posts")),
     path('groups/',include("groups.urls", namespace="groups")),
+    path('blog/',include("blog.urls", namespace="blog")),
+
 ]
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

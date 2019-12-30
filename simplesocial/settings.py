@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'groups.apps.GroupsConfig',
     'posts.apps.PostsConfig',
     'crispy_forms',
+    'blog',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -135,3 +136,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'thanks'
+# enail backend
+DEFAULT_FROM_EMAIL = 'deepaksapkota1991@gmail.com'
+SERVER_EMAIL = 'deepaksapkota1991@gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'deepaksapkota1991@gmail.com'
+EMAIL_HOST_PASSWORD = 'karishma007'

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block content %}<p></p>
+{% block content %}
 <div class="jumbotron">
-  <h1 class="display-4">Upload bulk member here!!</h1>
+  <h1 class="display-4">Here's the list of the member!</h1>
   {% if messages %}
   {% for message in message %}
   <div>
@@ -12,15 +12,11 @@
   {{order}}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <!-- <label>Upload a file</label>
-          <input type="file" name="file"> -->
-    <div class="custom-file">
-      <input type="file" class="custom-file-input" id="customFile">
-      <label class="custom-file-label" for="customFile">Choose file, Only accept CSV File </label>
-    </div><p></p>
-    <button type="submit" class="btn btn-primary btn-large">Upload</button>
+    <label>Upload a file</label>
+    <input type="file" name="file">
+    <p>Only accept CSV File</p>
+    <button type="submit"> Upload </button>
   </form>
-</div>
-{% endif %}
-
+  </div>
+  {% endif %}
 {% endblock%}

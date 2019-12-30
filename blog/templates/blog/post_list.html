@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+<p></p>
+<div class="jumbotron">
+  <div class="content">
+		{% if user.is_authenticated %}
+		<h1 class="display-4">Hello, <a href="{% url 'posts:for_user' username=user.username %}">{{user.username }}</a>
+    </h1>
+    {% endif %}
+
+	</div>
+
+    {% if user.is_authenticated %}
+      <p class="lead">Welcome to the Blog Page! You can post your blog here!!</p>
+      <a class="btn btn-success my-20 my-sm-0 ml-2" href="{% url 'blog:post_new' %}" class="btn btn-simple">Create New Post</a>
+      <a class="btn btn-warning my-20 my-sm-0 ml-2" href="{% url 'blog:post_draft_list' %}" class="btn btn-simple">View All Drafts</a>
+    {% else %}
+    <h1 class="display-4">Please Login !!</h1>
+    <a class="btn btn-primary btn-lg" href="{% url 'accounts:login' %}" role="button"><i class="fas fa-user"></i> Login</a>
+    {% endif %}
+</div>
+
+<div class="jumbotron">
+  {% for post in post_list %}
+    <h1><a href="{% url 'blog:post_detail' pk=post.pk %}"> {{ post.title }}</a></h1>
+      <p>Published: {{ post.published_date|date:"D M Y"}}</p>
+      <a href="{% url 'blog:post_detail' pk=post.pk %}"> Comments: {{ post.approve_comments.count }}</a>
+
+  {% endfor %}
+</div>
+{% endblock %}

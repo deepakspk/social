@@ -1,13 +1,16 @@
 import csv, io,datetime
-from .forms import MsgForm, MemberForm
+from .forms import MsgForm, MemberForm, contact_form
+from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, redirect
 from django.views.generic import (View, ListView, TemplateView, DetailView, CreateView, UpdateView, DeleteView)
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.conf import settings
 from . import models
+from django.core.mail import EmailMessage
 
 class TestPage(TemplateView):
     template_name = 'test.html'
@@ -168,3 +171,26 @@ def member_upload(request):
             print('{} added {} members'.format(contrib.contributor.name, getMembers))
 
         return redirect('/contributors')
+
+
+def contact(request):
+
+    if request.method == 'GET':
+        form = MsgForm()
+    else:
+        form = MsgForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            message = form.cleaned_data['message']
+            email = form.cleaned_data['email']
+            try:
+                send_mail(name, message, email,
+                    ['deepaksapkota1991@gmail.com'], fail_silently=False)
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('thanksformsg')
+    return render(request, "nursesApp/contact.html", {'form': form})
+
+
+def success(request):
+    return HttpResponse('Success! Thank you for your message.')

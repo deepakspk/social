@@ -20,6 +20,9 @@ class TestPage(TemplateView):
 class ThanksPage(TemplateView):
     template_name = 'thanks.html'
 
+class ThanksMsg(TemplateView):
+    template_name = 'thanksformsg.html'
+
 class PostListView(SelectRelatedMixin, generic.ListView):
     template_name = 'index.html'
     model = models.Post

@@ -1,5 +1,6 @@
 from django.urls import path, re_path, reverse
 from . import views
+from django.contrib import admin
 
 app_name = 'nursesApp'
 
@@ -14,4 +15,6 @@ path('members/<int:pk>/',views.MemberDetailView.as_view(),name='memberDetail'),
 path('members/update/<int:pk>/',views.MemberUpdateView.as_view(),name='memberUpdate'),
 path('members/delete/<int:pk>/',views.MemberDeleteView.as_view(),name='memberDelete'),
 path('upload',views.member_upload,name='upload'),
+path('contact/', views.contact, name='contact'),
+path('success/', views.success, name='success'),
 ]
