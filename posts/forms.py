@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+from posts.models import Comment
 
 
 class PostForm(forms.ModelForm):
@@ -24,3 +25,12 @@ class PostForm(forms.ModelForm):
                     pk__in=user.groups.values_list("group__pk")
                 )
             )
+
+class CommentForm(forms.ModelForm):
+    class Meta():
+        model = Comment
+        fields = ('user','text')
+        widgets = {
+            'user':forms.TextInput(attrs={'class':'textinputclass'}),
+            'text':forms.Textarea(attrs={'class':'editable medium-editor-textarea'})
+        }

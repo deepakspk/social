@@ -20,6 +20,10 @@ class SingleGroup(generic.DetailView):
 
 class ListGroups(generic.ListView):
     model = Group
+    context_object_name = 'group_list'
+
+    def get_queryset(self):
+        return models.Group.objects.all()
 
 
 class JoinGroup(LoginRequiredMixin, generic.RedirectView):

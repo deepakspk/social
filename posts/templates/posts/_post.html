@@ -6,10 +6,13 @@
     <blockquote class="blockquote mb-0">
       <h5>{{ post.message_html|safe }}</h5>
       <div class="card-footer text-muted">
-        <time class="time"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
+        <time class="time"><a href="{% url 'posts:post_detail' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
         {% if post.group %}
-        <footer class="blockquote-footer"><span class="group-name">in <strong><a href="{% url 'groups:all' %}">{{ post.group.name }} Group</a></strong></span></footer>
+        <footer2 class="blockquote-footer"><span class="group-name">in <strong><a href="{% url 'groups:all' %}">{{ post.group.name }} Group</a></strong></span></footer>
       </div>
+      <a class="btn btn-outline-primary mt-2  " href="{% url 'posts:add_comment_to_post' username=post.user.username pk=post.pk %}">Add comment</a>
+      <a class="btn btn-outline-primary mt-2  " href="#"><i class="fas fa-thumbs-up"></i></a>
+
     </blockquote>
     {% if user.is_authenticated and post.user == user and not hide_delete %}
     <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">

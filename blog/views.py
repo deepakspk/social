@@ -10,7 +10,7 @@ from django.views.generic import (TemplateView,ListView,
 
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from . import forms
 # Create your views here.
 class AboutView(TemplateView):
     template_name = 'blog/about.html'
@@ -29,18 +29,14 @@ class PostDetailView(DetailView):
 class CreatePostView(LoginRequiredMixin,CreateView):
     login_url = 'accounts/login/'
     redirect_field_name = 'blog/post_detail.html'
-
-    form_class = PostForm
-
+    form_class = forms.PostForm
     model = Post
 
 
 class PostUpdateView(LoginRequiredMixin,UpdateView):
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
-
     form_class = PostForm
-
     model = Post
 
 
@@ -52,7 +48,6 @@ class PostDeleteView(LoginRequiredMixin,DeleteView):
 class DraftListView(LoginRequiredMixin,ListView):
     login_url = 'accounts/login/'
     redirect_field_name = 'blog/post_draft_list.html'
-
     model = Post
 
     def get_queryset(self):

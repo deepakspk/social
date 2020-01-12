@@ -59,7 +59,6 @@ def addToContributor(sender, instance, *args, **kwargs):
     except Contributor.DoesNotExist:
         Contributor.objects.create(name=getMember.name)
 
-
 class Msg(models.Model):
     name = models.CharField(max_length=160)
     email = models.EmailField()

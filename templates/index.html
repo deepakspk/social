@@ -1,7 +1,8 @@
 {% extends "posts/post_base.html" %}
 {% load staticfiles %}
-{% block content %}<p></p>
-<div class="jumbotron">
+{% block content %}
+
+<div class="jumbotron mt-3">
   <div class="content">
 		{% if user.is_authenticated %}
 		<h1 class="display-4">Hello, <a href="{% url 'posts:for_user' username=user.username %}">{{user.username }}</a>
@@ -11,7 +12,7 @@
 	</div>
 
     {% if user.is_authenticated %}
-      <p class="lead">Welcome to the Groups Page! Select a Group with a shared interest!</p>
+      <p class="lead">Welcome to the Groups Page! Select a Group with a shared interest!!!</p>
       <a class="btn btn-success my-20 my-sm-0 ml-2" href="{% url 'posts:create' %}" class="btn btn-simple">Create Post</a>
       <a class="btn btn-warning my-20 my-sm-0 ml-2" href="{% url 'groups:all' %}" class="btn btn-simple">View All Groups</a>
       <a class="btn btn-primary my-20 my-sm-0 ml-2" href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a>
@@ -22,13 +23,38 @@
 
     {% endif %}
   </div>
-
 {% load humanize %}
 {% block post_content %}
-<div class="col-md-8">
-  {% for post in post_list %}
-  {% include "posts/_post.html" %}
-  {% endfor %}
+{% block group_content %}
+<div class="container">
+<div class="row">
+  <div class="col-md-8">
+    {% for post in post_list %}
+    {% include "posts/_post.html" %}
+    {% endfor %}
+  </div>
+  <div class="col-md-4">
+    <div class="list-group">
+  		{% for group in groups %}
+      <a href="{% url 'groups:single' slug=group.slug %}"
+      class="list-group-item list-group-item-action flex-column align-items-start">
+  			<h3 class="mb-1">{{ group.name }}</h3>
+  			<p class="mb-1">{{ group.description_html|safe }}</p>
+  			<div class="d-flex w-40 justify-content-between">
+  				<small class="text-muted"><span class="badge badge-secondary">
+  					{{ group.members.count }}</span> member{{ group.members.count|pluralize }}</small>
+  				<small class="text-muted"><span class="badge badge-secondary">
+  					{{ group.posts.count }}</span> post{{ group.posts.count|pluralize }}</small>
+  			<span></span><span></span>
+  			</div>
+        </a>
+
+
+  		{% endfor %}
+  	</div>
+  </div>
 </div>
+</div>
+{% endblock %}
 {% endblock %}
 {% endblock %}

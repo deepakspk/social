@@ -18,15 +18,6 @@ class TestPage(TemplateView):
 class ThanksPage(TemplateView):
     template_name = 'thanks.html'
 
-
-class IndexView(ListView):
-    template_name = 'nursesApp/index.html'
-    context_object_name = 'members'
-    model = models.Member
-
-    def get_queryset(self):
-        return models.Member.objects.all()
-
 class NurseshomeView(ListView):
     template_name = 'nursesApp/nurses.html'
     context_object_name = 'members'
